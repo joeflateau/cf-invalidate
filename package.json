@@ -21,6 +21,9 @@
     "invalidation"
   ],
   "author": "joeflateau",
+  "repository": {
+    "url": "https://github.com/joeflateau/cf-invalidate"
+  },
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1046.0",

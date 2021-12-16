@@ -14,14 +14,19 @@ export async function main() {
       "Cloudformation Stack Cloudfront Distribution Id Export Name",
       "/*"
     )
+    .option("-r, --region", "AWS region")
     .action(
       async (
         cloudformationStackName: string,
         cloudformationOutputExportName: string,
         cloudfrontInvalidationPath: string
       ) => {
+        const { region }: { region?: string } = program.opts();
+
         const describeStacksResults = (
-          await new CloudFormation()
+          await new CloudFormation({
+            region,
+          })
             .describeStacks({
               StackName: cloudformationStackName,
             })
@@ -39,7 +44,7 @@ export async function main() {
           throw new Error("could not find distribution output by export name");
         }
 
-        const invalidationResult = await new CloudFront()
+        const invalidationResult = await new CloudFront({ region })
           .createInvalidation({
             DistributionId: distributionId,
             InvalidationBatch: {

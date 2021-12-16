@@ -2,18 +2,19 @@
 
 Send invalidations to cloudfront distributions that are part of a cloudformation stack
 
-This project was bootstrapped with [TSPx](https://github.com/joeflateau/tspx).
+## Usage
 
-## Next steps
+```shell
+$ npx cf-invalidate --help
 
-### `npm run test`
+Usage: cf-invalidate [options] <cloudformationStackName> <cloudformationOutputExportName> [cloudfrontInvalidationPath]
 
-This will run the test suite. Tests are colocated with code and named `*.spec.ts`.
+Arguments:
+  cloudformationStackName         Cloudformation Stack Name
+  cloudformationOutputExportName  Cloudformation Stack Cloudfront Distribution Id Export Name
+  cloudfrontInvalidationPath      Cloudformation Stack Cloudfront Distribution Id Export Name (default: "/*")
 
-### `npm publish`
-
-This is how you publish to npm. This project has a `prepare` script that compiles the `.ts` to `.js` and `.d.ts`. It also has a `prepublishOnly` script that runs the test suite. Npm will call these scripts automatically as part of the publishing flow so you can be sure you are always publishing the compiled, tested package.
-
-### `npm run prepare` or `npm run build`
-
-You should not need to run these manually, the `prepare`/`prepublishOnly` scripts when you publish should be enough, but if you find it necessary, these are here for you.
+Options:
+  -r, --region                    AWS region
+  -h, --help                      display help for command
+```
