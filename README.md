@@ -15,6 +15,6 @@ Arguments:
   cloudfrontInvalidationPath      Cloudformation Stack Cloudfront Distribution Id Export Name (default: "/*")
 
 Options:
-  -r, --region                    AWS region
+  -r, --region <region>           AWS region
   -h, --help                      display help for command
 ```

@@ -14,7 +14,7 @@ export async function main() {
       "Cloudformation Stack Cloudfront Distribution Id Export Name",
       "/*"
     )
-    .option("-r, --region", "AWS region")
+    .option("-r, --region <region>", "AWS region")
     .action(
       async (
         cloudformationStackName: string,
