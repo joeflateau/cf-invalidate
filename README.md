@@ -22,12 +22,12 @@ npm i -g cf-invalidate
 ```shell
 $ npx cf-invalidate --help
 
-Usage: cf-invalidate [options] <stackName> <outputExportName> [invalidationPath]
+Usage: cf-invalidate [options] <stackName> <outputExportName> [invalidationPath...]
 
 Arguments:
   stackName              Cloudformation Stack Name
   outputExportName       Name that the Cloudfront Distribution Id is exported from the stack as
-  invalidationPath       Path on Cloudfront Distibution to invalidate (default: "/*")
+  invalidationPath       Paths on Cloudfront Distibution to invalidate (default: ["/*"])
 
 Options:
   -r, --region <region>  AWS region
