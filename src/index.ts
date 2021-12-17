@@ -7,7 +7,7 @@ export async function main() {
     .argument("<stackName>", "Cloudformation Stack Name")
     .argument(
       "<outputExportName>",
-      "Name that the Cloudfront Distribution is exported from the stack as"
+      "Name that the Cloudfront Distribution Id is exported from the stack as"
     )
     .argument(
       "[invalidationPath]",

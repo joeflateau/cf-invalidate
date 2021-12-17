@@ -11,7 +11,7 @@ Usage: cf-invalidate [options] <stackName> <outputExportName> [invalidationPath]
 
 Arguments:
   stackName              Cloudformation Stack Name
-  outputExportName       Name that the Cloudfront Distribution is exported from the stack as
+  outputExportName       Name that the Cloudfront Distribution Id is exported from the stack as
   invalidationPath       Path on Cloudfront Distibution to invalidate (default: "/*")
 
 Options:
