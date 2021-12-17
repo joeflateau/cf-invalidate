@@ -4,22 +4,22 @@ import { Command } from "commander";
 
 export async function main() {
   const program = new Command()
-    .argument("<cloudformationStackName>", "Cloudformation Stack Name")
+    .argument("<stackName>", "Cloudformation Stack Name")
     .argument(
-      "<cloudformationOutputExportName>",
-      "Cloudformation Stack Cloudfront Distribution Id Export Name"
+      "<outputExportName>",
+      "Name that the Cloudfront Distribution is exported from the stack as"
     )
     .argument(
-      "[cloudfrontInvalidationPath]",
-      "Cloudformation Stack Cloudfront Distribution Id Export Name",
+      "[invalidationPath]",
+      "Path on Cloudfront Distibution to invalidate",
       "/*"
     )
     .option("-r, --region <region>", "AWS region")
     .action(
       async (
-        cloudformationStackName: string,
-        cloudformationOutputExportName: string,
-        cloudfrontInvalidationPath: string
+        stackName: string,
+        outputExportName: string,
+        invalidationPath: string
       ) => {
         const { region }: { region?: string } = program.opts();
 
@@ -28,7 +28,7 @@ export async function main() {
             region,
           })
             .describeStacks({
-              StackName: cloudformationStackName,
+              StackName: stackName,
             })
             .promise()
         ).Stacks;
@@ -37,7 +37,7 @@ export async function main() {
           throw new Error(`could not describe stacks`);
         }
         const distributionId = describeStacksResults[0].Outputs?.find(
-          (output) => output.ExportName === cloudformationOutputExportName
+          (output) => output.ExportName === outputExportName
         )?.OutputValue;
 
         if (distributionId == null) {
@@ -48,7 +48,7 @@ export async function main() {
           .createInvalidation({
             DistributionId: distributionId,
             InvalidationBatch: {
-              Paths: { Quantity: 1, Items: [cloudfrontInvalidationPath] },
+              Paths: { Quantity: 1, Items: [invalidationPath] },
               CallerReference: Date.now().toString(),
             },
           })
@@ -61,7 +61,7 @@ export async function main() {
         }
 
         console.log(
-          `created invalidation '${invalidationId}' at path '${cloudfrontInvalidationPath}' on distribution '${distributionId}' from output exported as '${cloudformationOutputExportName}' from cloudformation stack '${cloudformationStackName}'`
+          `created invalidation '${invalidationId}' at path '${invalidationPath}' on distribution '${distributionId}' from output exported as '${outputExportName}' from cloudformation stack '${stackName}'`
         );
       }
     );
