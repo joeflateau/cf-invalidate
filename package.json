@@ -4,11 +4,12 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "echo 'no tests defined' && exit 0",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "build": "tsc",
     "prepare": "tsc",
     "prepublishOnly": "npm run test",
-    "release": "release-it"
+    "release": "release-it",
+    "help": "ts-node ./src/index.ts --help"
   },
   "files": [
     "dist"
